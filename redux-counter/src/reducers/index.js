@@ -1,5 +1,6 @@
 import * as types from '../actions/ActionTypes';
 
+// init
 const initialState = {
     counters: [
         {
@@ -9,6 +10,7 @@ const initialState = {
     ]
 };
 
+// action : 실제 리듀서에 전달 받는 액션 타입
 function counter(state = initialState, action) {
     const {counters} = state;
 

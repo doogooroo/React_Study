@@ -21,6 +21,7 @@ class App extends Component {
     }
 }
 
+// App컴포넌트 redux에 연결
 const mapToDispatch = (dispatch) => ({
     onCreate: () => dispatch(actions.create(getRandomColor())),
     onRemove: () => dispatch(actions.remove())

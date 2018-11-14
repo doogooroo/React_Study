@@ -3,8 +3,10 @@ import * as actions from '../actions';
 import { connect } from 'react-redux';
 import getRandomColor from '../lib/getRandomColor';
 
+// props 전달
 const mapStateToProps = (state) => ({ counters: state.counters }); 
 
+// 함수 전달
 const mapDispatchToProps = (dispatch) => ({
     onIncrement: (index) => dispatch(actions.increment(index)),
     onDecrement: (index) => dispatch(actions.decrement(index)),
@@ -14,6 +16,7 @@ const mapDispatchToProps = (dispatch) => ({
     }
 })
 
+// CounterListContainer props에 삽입
 const CounterListContainer = connect(mapStateToProps, mapDispatchToProps)(CounterList);
 
 export default CounterListContainer;

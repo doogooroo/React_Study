@@ -9,7 +9,9 @@ export const setInput = createAction(SET_INPUT); // 액션 생성 함수
 const initialState = Map({value:''});
 
 // 리듀서 생성
-export default handleActions({ [SET_INPUT]: (state, action) => { return state.set('value', action.type)}}, initialState);
+export default handleActions({ [SET_INPUT]: (state, action) => { 
+    return state.set('value', action.payload)} // payload
+}, initialState);
 
 
 // Ducks 구조 

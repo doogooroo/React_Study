@@ -8,12 +8,19 @@ class TodoList extends Component {
         return this.props.todos !== nextProps.todos;
     }
 
+    // todos에 다 담겨 있다(Map이기 때문에 .get()로 접근)
     render(){
         const {todos, onToggle, onRemove} = this.props;
         
         const todoList = todos.map(
             todo => (
-                <TodoItem key={todo.id} done={todo.done} onToggle={() => onToggle(todo.id)} onRemove={() => onRemove(todo.id)}>{todo.text}</TodoItem>
+                <TodoItem 
+                    key={todo.get('id')} 
+                    done={todo.get('done')} 
+                    onToggle={() => onToggle(todo.get('id'))} 
+                    onRemove={() => onRemove(todo.get('id'))}>
+                        {todo.get('text')}
+                </TodoItem>
             )
         )
 

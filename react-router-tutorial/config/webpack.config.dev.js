@@ -84,6 +84,7 @@ module.exports = {
   // These are the "entry points" to our application.
   // This means they will be the "root" imports that are included in JS bundle.
   entry: {
+    dev: 'react-error-overlay',
     app:[
     // Include an alternative client for WebpackDevServer. A client's job is to
     // connect to WebpackDevServer by a socket and get notified about changes.
@@ -97,10 +98,10 @@ module.exports = {
     // require.resolve('webpack/hot/dev-server'),
     require.resolve('react-dev-utils/webpackHotDevClient'),
     // Finally, this is your app's code:
-    paths.appIndexJs
+    paths.appIndexJs // src/index.js 파일 가리킴
     ],
     vender:[
-      require.resolve('./polyfills'),
+      //require.resolve('./polyfills'), // 구형 웹 브라우저 ES6전용 코드 제대로 작동해주는Lib
       'react',
       'react-dom',
       'react-router-dom'
@@ -115,9 +116,11 @@ module.exports = {
     // This does not produce a real file. It's just the virtual path that is
     // served by WebpackDevServer in development. This is the JS bundle
     // containing code from all our entry points, and the Webpack runtime.
-    filename: 'static/js/bundle.js',
+    //filename: 'static/js/bundle.js',
+    filename: 'static/js/[name].[hash].js',
     // There are also additional JS chunk files if you use code splitting.
-    chunkFilename: 'static/js/[name].chunk.js',
+    //chunkFilename: 'static/js/[name].chunk.js',
+    chunkFilename: 'static/js/[name].[chunkhash].chunk.js',
     // This is the URL that app is served from. We use "/" in development.
     publicPath: publicPath,
     // Point sourcemap entries to original disk location (format as URL on Windows)
@@ -344,6 +347,11 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name:'vender',
+      filename:'vender.js'
+    }),
+    new InterpolateHtmlPlugin(env.raw),
     // Generates an `index.html` file with the <script> injected.
     new HtmlWebpackPlugin({
       inject: true,

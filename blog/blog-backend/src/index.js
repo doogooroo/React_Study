@@ -1,23 +1,18 @@
 const Koa = require('koa');
+const Router = require('koa-router');
+const api = require('./api');
+const bodyParser = require('koa-bodyparser');
+
 const app = new Koa();
+const router = new Router();
 
-app.use((ctx, next) => {
-    console.log(1);
-    next().then(() => {console.log('bye')}); // 다음 미들웨어 실행
-})
+// 라우터 설정
+router.use('/api', api.routes()); // api 라우터 적용
+// 라우터 적용전 bodyParser 적용
+app.use(bodyParser());
+// app 인스턴스에 라우터 적용
+app.use(router.routes()).use(router.allowedMethods());
 
-app.use((ctx, next) => {
-    console.log(2);
-    next();// 다음 미들웨어 실행
-})
-
-app.use((ctx, next) => {
-    ctx.body = 'hello world';
-
-    console.log('main middleware URL : ' + ctx.URL);
-    console.log(next.name);
-});
-
-app.listen(4000, () =>{
-    console.log("listning to port 4000");
+app.listen(4000, () => {
+    console.log('listening to port 4000');
 })

@@ -5,6 +5,15 @@
   "license": "MIT",
   "dependencies": {
     "eslint": "^5.9.0",
-    "koa": "^2.6.2"
+    "koa": "^2.6.2",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.7"
+  },
+  "scripts": {
+    "start": "node src",
+    "start:dev": "nodemon --watch src/ src/index.js"
   }
 }
